@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drone Detection System</title>
+</head>
+<body>
+    <h1>Drone Detection System</h1>
+    <div>
+        <button onclick="switchMode('animal_detection')">Animal Detection</button>
+        <button onclick="switchMode('plant_health')">Plant Health Analysis</button>
+    </div>
+    <img src="{{ url_for('video_feed') }}" width="640" height="480" />
+    
+    <script>
+        function switchMode(mode) {
+            fetch('/switch_mode', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: `mode=${mode}`
+            }).then(response => response.text()).then(data => alert(data));
+        }
+    </script>
+</body>
+</html>
